@@ -5,7 +5,6 @@ import { login, register as registerUser, reset } from '../features/authSlice';
 import { BookOpen, Loader2, GraduationCap, Users, Building2, CheckCircle2 } from 'lucide-react';
 
 function Landing() {
-  const [activeTab, setActiveTab] = useState('login'); // 'login' or 'register'
   
   // Login State
   const [loginData, setLoginData] = useState({
@@ -13,15 +12,6 @@ function Landing() {
     loginPassword: '',
   });
   const { loginEmail, loginPassword } = loginData;
-
-  // Register State
-  const [registerData, setRegisterData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: 'student',
-  });
-  const { name, email, password, role } = registerData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,21 +34,9 @@ function Landing() {
     }));
   };
 
-  const onRegisterChange = (e) => {
-    setRegisterData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   const onLoginSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email: loginEmail, password: loginPassword }));
-  };
-
-  const onRegisterSubmit = (e) => {
-    e.preventDefault();
-    dispatch(registerUser({ name, email, password, role }));
   };
 
   return (
@@ -121,27 +99,7 @@ function Landing() {
         <div className="w-full max-w-md mt-16 md:mt-0">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-slate-900 mb-2">Welcome</h2>
-            <p className="text-slate-500">Sign in or create an account to continue</p>
-          </div>
-
-          {/* Custom Tabs */}
-          <div className="flex bg-slate-100 p-1 rounded-xl mb-8">
-            <button
-              onClick={() => setActiveTab('login')}
-              className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all ${
-                activeTab === 'login' ? 'bg-white text-primary shadow-sm' : 'text-slate-500 hover:text-slate-700'
-              }`}
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => setActiveTab('register')}
-              className={`flex-1 py-2.5 text-sm font-semibold rounded-lg transition-all ${
-                activeTab === 'register' ? 'bg-white text-primary shadow-sm' : 'text-slate-500 hover:text-slate-700'
-              }`}
-            >
-              Register
-            </button>
+            <p className="text-slate-500">Sign in to continue</p>
           </div>
 
           {isError && (
@@ -151,9 +109,8 @@ function Landing() {
           )}
 
           {/* Login Form */}
-          {activeTab === 'login' && (
-            <form onSubmit={onLoginSubmit} className="space-y-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div>
+          <form onSubmit={onLoginSubmit} className="space-y-5 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1.5">Email Address</label>
                 <input
                   type="email"
@@ -188,56 +145,6 @@ function Landing() {
                 {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Sign In'}
               </button>
             </form>
-          )}
-
-          {/* Register Form */}
-          {activeTab === 'register' && (
-            <form onSubmit={onRegisterSubmit} className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">Full Name</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-slate-50/50"
-                  name="name"
-                  value={name}
-                  placeholder="John Doe"
-                  onChange={onRegisterChange}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">College Email Address</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-slate-50/50"
-                  name="email"
-                  value={email}
-                  placeholder="name@college.edu"
-                  onChange={onRegisterChange}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
-                <input
-                  type="password"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-slate-50/50"
-                  name="password"
-                  value={password}
-                  placeholder="Create a strong password"
-                  onChange={onRegisterChange}
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-slate-900 text-white py-3.5 rounded-xl font-semibold hover:bg-slate-800 transition-all shadow-md flex items-center justify-center mt-6"
-              >
-                {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Create Account'}
-              </button>
-            </form>
-          )}
 
         </div>
       </div>
