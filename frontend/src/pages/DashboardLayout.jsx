@@ -121,7 +121,7 @@ function DashboardLayout() {
 
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="h-screen w-screen overflow-hidden bg-slate-50 flex">
       {/* Sidebar */}
       <aside className="w-64 bg-slate-900 border-r border-slate-800 hidden md:flex flex-col shrink-0 text-slate-300">
         <div className="p-6 border-b border-slate-800 flex items-center gap-3">

@@ -15,7 +15,7 @@ import Fees from './pages/Fees';
 import Library from './pages/Library';
 import AIAssistant from './pages/AIAssistant';
 import Marks from './pages/Marks';
-import StudentProfile from './pages/StudentProfile';
+import ProfileWrapper from './pages/ProfileWrapper';
 import StudentCourses from './pages/StudentCourses';
 
 import Institutions from './pages/Institutions';
@@ -62,7 +62,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<DashboardHome />} />
             <Route path="institutions" element={<Institutions />} />
-            <Route path="profile" element={<StudentProfile />} />
+            <Route path="profile" element={<ProfileWrapper />} />
             <Route path="my-courses" element={<StudentCourses />} />
             <Route path="departments" element={<Departments />} />
             <Route path="students" element={<Students />} />

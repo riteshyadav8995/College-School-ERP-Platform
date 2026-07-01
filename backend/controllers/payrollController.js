@@ -2,7 +2,13 @@ const Payroll = require('../models/Payroll');
 
 const getAll = async (req, res) => {
   try {
-    const data = await Payroll.find({ institution: req.user.institution }).populate('employee');
+    const data = await Payroll.find({ institution: req.user.institution }).populate({
+      path: 'employee',
+      populate: [
+        { path: 'user', select: '-password' },
+        { path: 'department' }
+      ]
+    });
     res.json(data);
   } catch (error) {
     res.status(500).json({ message: error.message });

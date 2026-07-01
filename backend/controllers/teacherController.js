@@ -109,10 +109,22 @@ const deleteTeacher = async (req, res) => {
   }
 };
 
+const getTeacherProfile = async (req, res) => {
+  try {
+    const Teacher = require('../models/Teacher');
+    const teacher = await Teacher.findOne({ user: req.user._id }).populate('user', '-password').populate('department');
+    if (!teacher) return res.status(404).json({ message: 'Teacher profile not found' });
+    res.json(teacher);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createTeacher,
   getTeachers,
   getTeacherById,
   updateTeacher,
-  deleteTeacher
+  deleteTeacher,
+  getTeacherProfile
 };
