@@ -72,7 +72,7 @@ function Inventory() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {(user.role === 'admin' || user.role === 'super_admin') && (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 col-span-1 h-fit">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 col-span-1 h-fit panel-scroll">
           <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><Plus className="w-5 h-5 text-primary" /> Add New Record</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             
@@ -100,8 +100,8 @@ function Inventory() {
         )}
 
         <div className={`bg-white rounded-2xl border border-slate-200 shadow-sm p-0 overflow-hidden ${user.role === 'admin' || user.role === 'super_admin' ? 'col-span-1 lg:col-span-2' : 'col-span-1 lg:col-span-3'}`}>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+          <div className="overflow-auto panel-scroll">
+            <table className="data-table w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs uppercase tracking-wider">
                   <th className="p-4 font-semibold capitalize">item Name</th><th className="p-4 font-semibold capitalize">quantity</th><th className="p-4 font-semibold capitalize">unit Price</th><th className="p-4 font-semibold capitalize">category</th>

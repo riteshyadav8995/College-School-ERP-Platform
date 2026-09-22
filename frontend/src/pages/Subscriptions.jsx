@@ -82,7 +82,7 @@ function Subscriptions() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 col-span-1 h-fit">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 col-span-1 h-fit panel-scroll">
           <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><Plus className="w-5 h-5 text-primary" /> Add New Plan</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             
@@ -138,7 +138,7 @@ function Subscriptions() {
           </form>
         </div>
 
-        <div className="col-span-1 lg:col-span-2 space-y-4">
+        <div className="col-span-1 lg:col-span-2 space-y-4 panel-scroll">
           {loading ? (
             <div className="p-12 flex justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>
           ) : plans.length > 0 ? (

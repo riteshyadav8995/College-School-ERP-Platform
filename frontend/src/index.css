@@ -106,3 +106,40 @@
     color: var(--color-foreground);
   }
 }
+
+@layer components {
+  /* Form and list panels on split pages scroll independently on large screens */
+  @media (min-width: 1024px) {
+    .panel-scroll {
+      max-height: calc(100vh - 17rem);
+      min-height: 20rem;
+      overflow-y: auto;
+    }
+  }
+
+  /* Grid-style data table with a sticky header */
+  .data-table th,
+  .data-table td {
+    border: 1px solid var(--color-slate-200);
+  }
+  .data-table tr > :first-child {
+    border-left: 0;
+  }
+  .data-table tr > :last-child {
+    border-right: 0;
+  }
+  .data-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    border-top: 0;
+    background-color: var(--color-slate-100);
+    color: var(--color-slate-600);
+  }
+  .data-table tbody tr:nth-child(even) {
+    background-color: var(--color-slate-50);
+  }
+  .data-table tbody tr:hover {
+    background-color: color-mix(in oklab, var(--color-primary) 6%, transparent);
+  }
+}

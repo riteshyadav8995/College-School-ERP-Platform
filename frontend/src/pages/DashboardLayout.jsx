@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Outlet, Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/authSlice';
+import SessionSelector from '../components/SessionSelector';
 import { LayoutDashboard, Users, BookOpen, User, DollarSign, Settings, Bell, MessageSquare, ChevronDown, GraduationCap, Award, Box, Briefcase, FileBarChart, Bot, Building2, LogOut, Search, CreditCard, ChevronRight } from 'lucide-react';
 
 const NavItem = ({ to, icon: Icon, label, hidden }) => {
@@ -107,8 +108,6 @@ function DashboardLayout() {
   // Determine Branding & Settings
   const institutionName = user.institution?.name || 'School ERP';
   const shortForm = user.institution?.shortForm || 'School';
-  const academicYear = user.settings?.academicYear || '2026-27';
-  const semester = user.settings?.semester || 'Monsoon';
 
   const formatRole = (role) => {
     if (role === 'super_admin') return 'Super Administrator';
@@ -222,16 +221,7 @@ function DashboardLayout() {
 
           <div className="flex items-center gap-6">
             {/* Academic Session Tags (hidden on super admin) */}
-            {user.role !== 'super_admin' && (
-              <div className="hidden lg:flex items-center gap-3 mr-4">
-                <div className="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-md border border-blue-100">
-                  AY: {academicYear}
-                </div>
-                <div className="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-md border border-indigo-100">
-                  {semester} Sem
-                </div>
-              </div>
-            )}
+            {user.role !== 'super_admin' && <SessionSelector user={user} />}
 
           </div>
         </header>
