@@ -1,4 +1,3 @@
-const Groq = require('groq-sdk');
 const Student = require('../models/Student');
 const Teacher = require('../models/Teacher');
 const Department = require('../models/Department');
@@ -8,10 +7,6 @@ const Fee = require('../models/Fee');
 const BookIssue = require('../models/BookIssue');
 const Institution = require('../models/Institution');
 const mongoose = require('mongoose');
-
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY || 'dummy_groq_key'
-});
 
 const generateResponse = async (prompt, user) => {
   try {
@@ -73,18 +68,38 @@ You are talking to a user whose role is: ${user.role} and name is: ${user.name |
 ${contextStr}
 Please answer the user's questions clearly, concisely, and helpfully. Keep responses relatively short.`;
 
-    const chatCompletion = await groq.chat.completions.create({
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: prompt }
-      ],
-      model: "llama-3.1-8b-instant", 
+    const geminiApiKey = process.env.GEMINI_API_KEY;
+    if (!geminiApiKey) {
+      throw new Error('GEMINI_API_KEY not configured');
+    }
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [{
+          role: 'user',
+          parts: [{ text: prompt }]
+        }],
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
+        }
+      })
     });
 
-    return chatCompletion.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response.";
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Gemini API Error: ${errorData?.error?.message || response.statusText}`);
+    }
+
+    const responseData = await response.json();
+    return responseData.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I couldn't generate a response.";
+
   } catch (error) {
-    if (error.status === 401 || error.message?.includes('API key') || error.message?.includes('401')) {
-      return "It looks like the Groq API Key hasn't been configured correctly or is invalid! Please update the `.env` file in the backend with your real `GROQ_API_KEY`.";
+    if (error.message?.includes('GEMINI_API_KEY') || error.message?.includes('API key not valid')) {
+      return "It looks like the Gemini API Key hasn't been configured correctly! Please check the `.env` file.";
     }
     throw error;
   }
