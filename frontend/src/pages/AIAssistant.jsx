@@ -37,7 +37,7 @@ function AIAssistant() {
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error(error);
-      const errorMessage = { role: 'assistant', content: "Oops! The AI Assistant is temporarily unavailable. Please try again later or contact support if the issue persists." };
+      const errorMessage = { role: 'assistant', content: error.response?.data?.message || "Oops! The AI Assistant is temporarily unavailable. Please try again later or contact support if the issue persists." };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setLoading(false);
@@ -57,7 +57,7 @@ function AIAssistant() {
         </div>
         <div>
           <h2 className="text-xl font-bold text-slate-800">ERP-Bot</h2>
-          <p className="text-xs text-slate-500">Powered by Groq Llama3</p>
+          <p className="text-xs text-slate-500">Powered by Google Gemini</p>
         </div>
       </div>
 
