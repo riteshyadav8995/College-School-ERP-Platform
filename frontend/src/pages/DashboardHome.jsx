@@ -151,8 +151,8 @@ function DashboardHome() {
           <section>
             <h2 className="text-lg font-bold text-slate-800 mb-4">Institution Overview</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <CompactStatCard title="Total Students" value={stats.totalStudents || '8,421'} icon={Users} colorClass="bg-blue-500 text-blue-600" onClick={() => navigate('/dashboard/students')} />
-              <CompactStatCard title="Total Faculty" value={stats.totalTeachers || '512'} icon={UserPlus} colorClass="bg-indigo-500 text-indigo-600" onClick={() => navigate('/dashboard/teachers')} />
+              <CompactStatCard title="Total Students" value={stats.totalStudents || 0} icon={Users} colorClass="bg-blue-500 text-blue-600" onClick={() => navigate('/dashboard/students')} />
+              <CompactStatCard title="Total Faculty" value={stats.totalTeachers || 0} icon={UserPlus} colorClass="bg-indigo-500 text-indigo-600" onClick={() => navigate('/dashboard/teachers')} />
               <CompactStatCard title="Departments" value={stats.totalDepartments || 0} icon={Building2} colorClass="bg-purple-500 text-purple-600" onClick={() => navigate('/dashboard/departments')} />
               <CompactStatCard title="Courses" value={stats.totalCourses || 0} icon={LayoutTemplate} colorClass="bg-pink-500 text-pink-600" onClick={() => navigate('/dashboard/courses')} />
               <CompactStatCard title="Pending Leave" value={stats.pendingLeave || 0} icon={Clock} colorClass="bg-amber-500 text-amber-600" onClick={() => navigate('/dashboard/faculty-leave')} />
