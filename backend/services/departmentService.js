@@ -17,7 +17,12 @@ const getDepartmentById = async (id, institutionId) => {
 };
 
 const updateDepartment = async (id, institutionId, data) => {
-  const department = await Department.findOneAndUpdate({ _id: id, institution: institutionId }, data, { new: true });
+  const { name, description } = data;
+  const department = await Department.findOneAndUpdate(
+    { _id: id, institution: institutionId },
+    { name, description },
+    { returnDocument: 'after', runValidators: true }
+  );
   if (!department) throw new Error('Department not found');
   return department;
 };

@@ -11,6 +11,8 @@ function Departments() {
   // Form state
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ name: '', description: '' });
+  const [editingId, setEditingId] = useState(null);
+  const [error, setError] = useState('');
 
   const API_URL = `${import.meta.env.VITE_API_URL}/api/departments`;
 
@@ -38,14 +40,42 @@ function Departments() {
       const config = {
         headers: { Authorization: `Bearer ${user.token}` },
       };
-      const response = await axios.post(API_URL, formData, config);
-      setDepartments([...departments, response.data]);
-      setShowForm(false);
-      setFormData({ name: '', description: '' });
+      if (editingId) {
+        const response = await axios.put(`${API_URL}/${editingId}`, formData, config);
+        setDepartments(departments.map((d) => (d._id === editingId ? response.data : d)));
+      } else {
+        const response = await axios.post(API_URL, formData, config);
+        setDepartments([...departments, response.data]);
+      }
+      closeForm();
     } catch (error) {
       console.error(error);
+      setError('Could not save department. Please try again.');
     }
   };
+
+  const openAddForm = () => {
+    setEditingId(null);
+    setFormData({ name: '', description: '' });
+    setError('');
+    setShowForm(true);
+  };
+
+  const openEditForm = (dept) => {
+    setEditingId(dept._id);
+    setFormData({ name: dept.name, description: dept.description || '' });
+    setError('');
+    setShowForm(true);
+  };
+
+  const closeForm = () => {
+    setShowForm(false);
+    setEditingId(null);
+    setFormData({ name: '', description: '' });
+    setError('');
+  };
+
+  const canManage = user.role === 'super_admin' || user.role === 'admin';
 
   if (loading) {
     return <div className="flex justify-center p-12"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
@@ -60,9 +90,9 @@ function Departments() {
           </div>
           <h2 className="text-xl font-bold text-slate-800">Departments</h2>
         </div>
-        {(user.role === 'super_admin' || user.role === 'admin') && (
-          <button 
-            onClick={() => setShowForm(!showForm)}
+        {canManage && (
+          <button
+            onClick={() => (showForm && !editingId ? closeForm() : openAddForm())}
             className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
           >
             <Plus className="w-4 h-4" />
@@ -74,6 +104,8 @@ function Departments() {
       {showForm && (
         <div className="p-6 border-b border-slate-200 bg-slate-50/50">
           <form onSubmit={onSubmit} className="max-w-md space-y-4">
+            <h3 className="text-base font-semibold text-slate-800">{editingId ? 'Edit Department' : 'Add Department'}</h3>
+            {error && <p className="text-sm text-red-600">{error}</p>}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">Department Name</label>
               <input
@@ -94,8 +126,8 @@ function Departments() {
               ></textarea>
             </div>
             <div className="flex gap-3">
-              <button type="submit" className="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90">Save</button>
-              <button type="button" onClick={() => setShowForm(false)} className="bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-300">Cancel</button>
+              <button type="submit" className="bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90">{editingId ? 'Update' : 'Save'}</button>
+              <button type="button" onClick={closeForm} className="bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-medium hover:bg-slate-300">Cancel</button>
             </div>
           </form>
         </div>
@@ -116,7 +148,9 @@ function Departments() {
                 <td className="px-6 py-4 font-medium text-slate-800">{dept.name}</td>
                 <td className="px-6 py-4 text-slate-600">{dept.description || '-'}</td>
                 <td className="px-6 py-4 text-right">
-                  <button className="text-primary hover:underline text-sm font-medium">Edit</button>
+                  {canManage && (
+                    <button onClick={() => openEditForm(dept)} className="text-primary hover:underline text-sm font-medium">Edit</button>
+                  )}
                 </td>
               </tr>
             ))}
