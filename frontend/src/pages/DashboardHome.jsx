@@ -13,6 +13,7 @@ function DashboardHome() {
   const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showAllActivities, setShowAllActivities] = useState(false);
 
   useEffect(() => {
     if (!user) return;
@@ -36,8 +37,23 @@ function DashboardHome() {
   if (loading) return <div className="flex justify-center p-12"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
   if (!stats) return <div className="p-6 text-slate-500">Failed to load dashboard data.</div>;
 
+  const CompactStatCard = ({ title, value, icon: Icon, colorClass, onClick }) => (
+    <div
+      onClick={onClick}
+      className={`bg-white px-4 py-3 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3 ${onClick ? 'cursor-pointer hover:shadow-md transition-all hover:border-primary/30' : ''}`}
+    >
+      <div className="relative p-2 shrink-0">
+        <div className={`absolute inset-0 rounded-lg opacity-10 ${colorClass}`}></div>
+        <Icon className={`relative w-4 h-4 ${colorClass.split(' ')[1]}`} />
+      </div>
+      <p className="text-sm font-semibold text-slate-600 truncate">
+        {title} : <span className="text-lg font-bold text-slate-800">{value}</span>
+      </p>
+    </div>
+  );
+
   const StatCard = ({ title, value, icon: Icon, colorClass, onClick }) => (
-    <div 
+    <div
       onClick={onClick}
       className={`bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden group ${onClick ? 'cursor-pointer hover:shadow-md transition-all hover:border-primary/30' : ''}`}
     >
@@ -135,14 +151,14 @@ function DashboardHome() {
           <section>
             <h2 className="text-lg font-bold text-slate-800 mb-4">Institution Overview</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <StatCard title="Total Students" value={stats.totalStudents || '8,421'} icon={Users} colorClass="bg-blue-500 text-blue-600" onClick={() => navigate('/dashboard/students')} />
-              <StatCard title="Total Faculty" value={stats.totalTeachers || '512'} icon={UserPlus} colorClass="bg-indigo-500 text-indigo-600" onClick={() => navigate('/dashboard/teachers')} />
-              <StatCard title="Departments" value={stats.totalDepartments || 0} icon={Building2} colorClass="bg-purple-500 text-purple-600" onClick={() => navigate('/dashboard/departments')} />
-              <StatCard title="Courses" value={stats.totalCourses || 0} icon={LayoutTemplate} colorClass="bg-pink-500 text-pink-600" onClick={() => navigate('/dashboard/courses')} />
-              <StatCard title="Pending Leave" value={stats.pendingLeave || 0} icon={Clock} colorClass="bg-amber-500 text-amber-600" onClick={() => navigate('/dashboard/faculty-leave')} />
-              <StatCard title="Today's Classes" value={stats.todayClassesCount || 0} icon={Calendar} colorClass="bg-sky-500 text-sky-600" onClick={() => navigate('/dashboard/timetable')} />
-              <StatCard title="Fee Collected" value={stats.fees?.totalCollected ? `₹${(stats.fees.totalCollected/100000).toFixed(2)} L` : '₹0'} icon={IndianRupee} colorClass="bg-emerald-500 text-emerald-600" onClick={() => navigate('/dashboard/fees')} />
-              <StatCard title="Books Issued" value={stats.booksIssued || 0} icon={Book} colorClass="bg-teal-500 text-teal-600" onClick={() => navigate('/dashboard/library')} />
+              <CompactStatCard title="Total Students" value={stats.totalStudents || '8,421'} icon={Users} colorClass="bg-blue-500 text-blue-600" onClick={() => navigate('/dashboard/students')} />
+              <CompactStatCard title="Total Faculty" value={stats.totalTeachers || '512'} icon={UserPlus} colorClass="bg-indigo-500 text-indigo-600" onClick={() => navigate('/dashboard/teachers')} />
+              <CompactStatCard title="Departments" value={stats.totalDepartments || 0} icon={Building2} colorClass="bg-purple-500 text-purple-600" onClick={() => navigate('/dashboard/departments')} />
+              <CompactStatCard title="Courses" value={stats.totalCourses || 0} icon={LayoutTemplate} colorClass="bg-pink-500 text-pink-600" onClick={() => navigate('/dashboard/courses')} />
+              <CompactStatCard title="Pending Leave" value={stats.pendingLeave || 0} icon={Clock} colorClass="bg-amber-500 text-amber-600" onClick={() => navigate('/dashboard/faculty-leave')} />
+              <CompactStatCard title="Today's Classes" value={stats.todayClassesCount || 0} icon={Calendar} colorClass="bg-sky-500 text-sky-600" onClick={() => navigate('/dashboard/timetable')} />
+              <CompactStatCard title="Fee Collected" value={stats.fees?.totalCollected ? `₹${(stats.fees.totalCollected/100000).toFixed(2)} L` : '₹0'} icon={IndianRupee} colorClass="bg-emerald-500 text-emerald-600" onClick={() => navigate('/dashboard/fees')} />
+              <CompactStatCard title="Books Issued" value={stats.booksIssued || 0} icon={Book} colorClass="bg-teal-500 text-teal-600" onClick={() => navigate('/dashboard/library')} />
             </div>
           </section>
 
@@ -191,11 +207,15 @@ function DashboardHome() {
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm col-span-1 lg:col-span-2">
               <div className="p-5 border-b border-slate-100 flex justify-between items-center">
                 <h3 className="text-base font-bold text-slate-800">Recent Activities</h3>
-                <button className="text-sm font-medium text-primary hover:text-primary-600 flex items-center">View All <ChevronRight className="w-4 h-4 ml-1" /></button>
+                {stats.recentActivities?.length > 5 && (
+                  <button onClick={() => setShowAllActivities(!showAllActivities)} className="text-sm font-medium text-primary hover:text-primary-600 flex items-center">
+                    {showAllActivities ? 'Show Less' : 'View All'} <ChevronRight className={`w-4 h-4 ml-1 transition-transform ${showAllActivities ? '-rotate-90' : ''}`} />
+                  </button>
+                )}
               </div>
               <div className="divide-y divide-slate-50">
                 {stats.recentActivities && stats.recentActivities.length > 0 ? (
-                  stats.recentActivities.map((act, i) => {
+                  (showAllActivities ? stats.recentActivities : stats.recentActivities.slice(0, 5)).map((act, i) => {
                     let IconComponent = UserPlus;
                     let color = 'text-slate-500';
                     let bg = 'bg-slate-50';

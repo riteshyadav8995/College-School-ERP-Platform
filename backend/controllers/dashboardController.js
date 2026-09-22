@@ -165,13 +165,13 @@ const getDashboardStats = async (req, res) => {
       }
 
       // Recent Activities
-      // Fetch 5 recent students
+      // Fetch latest students, leaves and book issues
       const recentStudents = await Student.find({ institution: institutionId })
-        .sort('-createdAt').limit(2).populate('user', 'name');
+        .sort('-createdAt').limit(10).populate('user', 'name');
       const recentLeaves = await TeacherLeave.find({ institution: institutionId })
-        .sort('-createdAt').limit(2).populate('teacher');
+        .sort('-createdAt').limit(10).populate('teacher');
       const recentIssues = await BookIssue.find({ institution: institutionId })
-        .sort('-issueDate').limit(2).populate('book');
+        .sort('-issueDate').limit(10).populate('book');
         
       let recentActivities = [];
       recentStudents.forEach(s => {
@@ -179,7 +179,7 @@ const getDashboardStats = async (req, res) => {
           type: 'admission',
           text: `New admission: ${s.user?.name || 'Student'} enrolled.`,
           date: s.createdAt,
-          time: new Date(s.createdAt).toLocaleTimeString()
+          time: new Date(s.createdAt).toLocaleString()
         });
       });
       recentLeaves.forEach(l => {
@@ -187,7 +187,7 @@ const getDashboardStats = async (req, res) => {
           type: 'leave',
           text: `Faculty leave request: from ${l.teacher?.user?.name || 'Teacher'}.`,
           date: l.createdAt,
-          time: new Date(l.createdAt).toLocaleTimeString()
+          time: new Date(l.createdAt).toLocaleString()
         });
       });
       recentIssues.forEach(b => {
@@ -195,11 +195,11 @@ const getDashboardStats = async (req, res) => {
           type: 'library',
           text: `Library transaction: ${b.book?.title || 'A book'} issued.`,
           date: b.issueDate,
-          time: new Date(b.issueDate).toLocaleTimeString()
+          time: new Date(b.issueDate).toLocaleString()
         });
       });
       recentActivities.sort((a, b) => new Date(b.date) - new Date(a.date));
-      recentActivities = recentActivities.slice(0, 5);
+      recentActivities = recentActivities.slice(0, 20);
 
       stats = {
         totalStudents,
