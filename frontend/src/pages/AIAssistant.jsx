@@ -37,7 +37,7 @@ function AIAssistant() {
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error(error);
-      const errorMessage = { role: 'assistant', content: error.response?.data?.message || "Oops! The AI Assistant is temporarily unavailable. Please try again later or contact support if the issue persists." };
+      const errorMessage = { role: 'assistant', content: "i am fetching some issue, you can try after some time" };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setLoading(false);
