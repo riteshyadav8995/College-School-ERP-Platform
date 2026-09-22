@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sessionScope = require('../plugins/sessionScope');
 
 const schema = new mongoose.Schema({
   facultyId: { type: mongoose.Schema.Types.ObjectId, ref: 'Teacher', required: true },
@@ -10,5 +11,7 @@ const schema = new mongoose.Schema({
 });
 
 schema.index({ facultyId: 1, courseId: 1, academicYear: 1 }, { unique: true });
+
+schema.plugin(sessionScope);
 
 module.exports = mongoose.model('FacultyCourse', schema);

@@ -36,6 +36,17 @@ import Subscriptions from './pages/Subscriptions';
 import Programs from './pages/Programs';
 import Courses from './pages/Courses';
 import Semester from './pages/Semester';
+import { getCurrentSession } from './lib/session';
+
+// Send the selected academic session with every request to our API
+axios.interceptors.request.use((config) => {
+  const session = getCurrentSession();
+  if (session && config.url?.startsWith(import.meta.env.VITE_API_URL)) {
+    config.headers['X-Academic-Year'] = session.academicYear;
+    config.headers['X-Semester'] = session.semester;
+  }
+  return config;
+});
 
 // Global Axios Interceptor to handle 401 Unauthorized
 axios.interceptors.response.use(

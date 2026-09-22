@@ -3,6 +3,7 @@ import { useNavigate, Outlet, Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/authSlice';
 import SessionSelector from '../components/SessionSelector';
+import { loadSession, saveSession, setCurrentSession } from '../lib/session';
 import { LayoutDashboard, Users, BookOpen, User, DollarSign, Settings, Bell, MessageSquare, ChevronDown, GraduationCap, Award, Box, Briefcase, FileBarChart, Bot, Building2, LogOut, Search, CreditCard, ChevronRight } from 'lucide-react';
 
 const NavItem = ({ to, icon: Icon, label, hidden }) => {
@@ -67,6 +68,8 @@ function DashboardLayout() {
 
   const { user } = useSelector((state) => state.auth);
   
+  const [session, setSession] = useState(() => (user ? loadSession(user) : null));
+
   const [expandedMenus, setExpandedMenus] = useState({
     academic: false,
     students: false,
@@ -100,6 +103,18 @@ function DashboardLayout() {
   }
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
+
+  // Requests from the pages below carry the selected session; the key remounts
+  // the current page when the session changes so it refetches its data.
+  const activeSession = user.role !== 'super_admin' ? (session || loadSession(user)) : null;
+  setCurrentSession(activeSession);
+  const sessionKey = activeSession ? `${activeSession.academicYear}|${activeSession.semester}` : 'all';
+
+  const changeSession = (next) => {
+    saveSession(user, next);
+    setCurrentSession(next);
+    setSession(next);
+  };
 
   const toggleMenu = (menu) => {
     setExpandedMenus(prev => ({ ...prev, [menu]: !prev[menu] }));
@@ -221,14 +236,14 @@ function DashboardLayout() {
 
           <div className="flex items-center gap-6">
             {/* Academic Session Tags (hidden on super admin) */}
-            {user.role !== 'super_admin' && <SessionSelector user={user} />}
+            {user.role !== 'super_admin' && <SessionSelector user={user} session={session} onChange={changeSession} />}
 
           </div>
         </header>
 
         {/* Content Area */}
         <div ref={mainContentRef} className="flex-1 overflow-auto p-8">
-          <Outlet />
+          <Outlet key={sessionKey} />
         </div>
       </main>
     </div>

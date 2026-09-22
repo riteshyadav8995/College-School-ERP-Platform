@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sessionScope = require('../plugins/sessionScope');
 
 const feeSchema = new mongoose.Schema({
   student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
@@ -11,5 +12,7 @@ const feeSchema = new mongoose.Schema({
   paymentDate: { type: Date },
   createdAt: { type: Date, default: Date.now }
 });
+
+feeSchema.plugin(sessionScope);
 
 module.exports = mongoose.model('Fee', feeSchema);

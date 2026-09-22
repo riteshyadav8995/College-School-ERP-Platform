@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sessionScope = require('../plugins/sessionScope');
 
 const attendanceSchema = new mongoose.Schema({
   date: { type: Date, required: true },
@@ -14,5 +15,7 @@ const attendanceSchema = new mongoose.Schema({
 
 // Compound index to prevent duplicate attendance records for a student for the same lecture
 attendanceSchema.index({ courseId: 1, studentId: 1, date: 1, lectureNumber: 1 }, { unique: true });
+
+attendanceSchema.plugin(sessionScope);
 
 module.exports = mongoose.model('Attendance', attendanceSchema);

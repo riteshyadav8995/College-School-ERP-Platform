@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sessionScope = require('../plugins/sessionScope');
 
 const assignmentSchema = new mongoose.Schema({
   institution: { type: mongoose.Schema.Types.ObjectId, ref: 'Institution', required: true },
@@ -10,5 +11,7 @@ const assignmentSchema = new mongoose.Schema({
   fileUrl: { type: String }, // Optional file attachment
   createdAt: { type: Date, default: Date.now }
 });
+
+assignmentSchema.plugin(sessionScope);
 
 module.exports = mongoose.model('Assignment', assignmentSchema);

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sessionScope = require('../plugins/sessionScope');
 
 const timetableSchema = new mongoose.Schema({
   institution: { type: mongoose.Schema.Types.ObjectId, ref: 'Institution', required: true },
@@ -13,5 +14,7 @@ const timetableSchema = new mongoose.Schema({
   room: { type: String },
   createdAt: { type: Date, default: Date.now }
 });
+
+timetableSchema.plugin(sessionScope);
 
 module.exports = mongoose.model('Timetable', timetableSchema);

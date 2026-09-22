@@ -4,16 +4,8 @@ import { Settings2, Plus, Trash2, X, Loader2 } from 'lucide-react';
 
 // Academic year / semester picker shown in the dashboard header.
 // Everyone picks from the institution's list; admins can also edit the list.
-function SessionSelector({ user }) {
-  const storageKey = `session:${user._id}`;
+function SessionSelector({ user, session, onChange }) {
   const [settings, setSettings] = useState(null);
-  const [selected, setSelected] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem(storageKey)) || {};
-    } catch {
-      return {};
-    }
-  });
   const [showManage, setShowManage] = useState(false);
 
   const isAdmin = user.role === 'admin';
@@ -26,22 +18,20 @@ function SessionSelector({ user }) {
       .catch((error) => console.error('Error fetching settings:', error));
   }, []);
 
-  const academicYears = settings?.academicYears || [user.settings?.academicYear || '2026-27'];
-  const semesters = settings?.semesters || [user.settings?.semester || 'Monsoon'];
+  const academicYears = settings?.academicYears || [session.academicYear];
+  const semesters = settings?.semesters || [session.semester];
 
   // Fall back to the institution default when the saved choice no longer exists
-  const academicYear = academicYears.includes(selected.academicYear) ? selected.academicYear : (settings?.academicYear || academicYears[0]);
-  const semester = semesters.includes(selected.semester) ? selected.semester : (settings?.semester || semesters[0]);
+  const academicYear = academicYears.includes(session.academicYear) ? session.academicYear : (settings?.academicYear || academicYears[0]);
+  const semester = semesters.includes(session.semester) ? session.semester : (settings?.semester || semesters[0]);
 
-  const choose = (field, value) => {
-    const next = { academicYear, semester, [field]: value };
-    setSelected(next);
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(next));
-    } catch {
-      // Storage unavailable; the choice just won't be remembered
+  useEffect(() => {
+    if (settings && (academicYear !== session.academicYear || semester !== session.semester)) {
+      onChange({ academicYear, semester });
     }
-  };
+  }, [settings, academicYear, semester]);
+
+  const choose = (field, value) => onChange({ academicYear, semester, [field]: value });
 
   const selectClass = 'px-2 py-1 text-xs font-bold rounded-md border outline-none cursor-pointer focus:ring-2 focus:ring-primary/20';
 

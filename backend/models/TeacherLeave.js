@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sessionScope = require('../plugins/sessionScope');
 
 const teacherLeaveSchema = new mongoose.Schema({
   teacher: { type: mongoose.Schema.Types.ObjectId, ref: 'Teacher', required: true },
@@ -12,5 +13,7 @@ const teacherLeaveSchema = new mongoose.Schema({
   processedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   processedAt: { type: Date }
 });
+
+teacherLeaveSchema.plugin(sessionScope);
 
 module.exports = mongoose.model('TeacherLeave', teacherLeaveSchema);

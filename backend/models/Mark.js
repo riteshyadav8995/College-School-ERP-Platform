@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sessionScope = require('../plugins/sessionScope');
 
 const markSchema = new mongoose.Schema({
   student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
@@ -8,5 +9,7 @@ const markSchema = new mongoose.Schema({
   teacher: { type: mongoose.Schema.Types.ObjectId, ref: 'Teacher' },
   createdAt: { type: Date, default: Date.now }
 });
+
+markSchema.plugin(sessionScope);
 
 module.exports = mongoose.model('Mark', markSchema);
