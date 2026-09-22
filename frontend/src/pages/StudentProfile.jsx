@@ -109,7 +109,7 @@ function StudentProfile() {
   }
 
   if (!profile) {
-    return <div className="p-8 text-center text-slate-500">Failed to load profile data.</div>;
+    return <div className="p-5 sm:p-8 text-center text-slate-500">Failed to load profile data.</div>;
   }
 
   const FileUploadBox = ({ title, name, currentFileUrl }) => (
@@ -155,7 +155,7 @@ function StudentProfile() {
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         {/* Profile Header */}
-        <div className="bg-primary/5 p-8 border-b border-slate-200 flex flex-col md:flex-row items-center gap-6">
+        <div className="bg-primary/5 p-5 sm:p-8 border-b border-slate-200 flex flex-col md:flex-row items-center gap-6">
           <div className="relative">
             <div className="w-24 h-24 bg-white rounded-full border-4 border-white shadow-md flex items-center justify-center overflow-hidden">
               {profile.documents?.photo ? (
@@ -182,7 +182,7 @@ function StudentProfile() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8">
+        <form onSubmit={handleSubmit} className="p-5 sm:p-8">
           {successMsg && (
             <div className="mb-6 p-4 bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-xl flex items-center gap-2">
               <CheckCircle className="w-5 h-5" />
@@ -272,7 +272,7 @@ function StudentProfile() {
         </form>
 
         {/* Issued Books Section */}
-        <div className="p-8 border-t border-slate-100 bg-slate-50/50">
+        <div className="p-5 sm:p-8 border-t border-slate-100 bg-slate-50/50">
           <h3 className="text-lg font-bold text-slate-800 border-b border-slate-200 pb-2 mb-6 flex items-center gap-2">
             <BookOpen className="w-5 h-5 text-indigo-500" /> Library - Issued Books
           </h3>
@@ -287,7 +287,7 @@ function StudentProfile() {
                     <h4 className="font-bold text-slate-800 leading-tight">{issue.book?.title}</h4>
                     <p className="text-sm text-slate-500 mt-1">{issue.book?.author}</p>
                   </div>
-                  <div className="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center text-sm">
+                  <div className="mt-4 pt-4 border-t border-slate-100 flex justify-between items-center text-sm flex-wrap gap-3">
                     <span className="text-slate-500 font-medium">Due: {new Date(issue.dueDate).toLocaleDateString()}</span>
                     <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${issue.status === 'Returned' ? 'bg-emerald-50 text-emerald-700' : (new Date(issue.dueDate) < new Date() ? 'bg-red-50 text-red-700' : 'bg-indigo-50 text-indigo-700')}`}>
                       {issue.status} {issue.fine > 0 && `(₹${issue.fine})`}
@@ -297,7 +297,7 @@ function StudentProfile() {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-xl border border-slate-200 p-8 text-center">
+            <div className="bg-white rounded-xl border border-slate-200 p-5 sm:p-8 text-center">
               <BookOpen className="w-8 h-8 text-slate-300 mx-auto mb-3" />
               <p className="text-slate-500 font-medium">No books currently issued.</p>
             </div>

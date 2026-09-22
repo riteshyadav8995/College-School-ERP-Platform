@@ -230,7 +230,7 @@ function Courses() {
               </select>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5 capitalize">Course Code</label>
                 <input type="text" name="courseCode" required value={formData.courseCode} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />
@@ -272,7 +272,7 @@ function Courses() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {loading ? (
-                  <tr><td colSpan="6" className="p-8 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" /></td></tr>
+                  <tr><td colSpan="6" className="p-5 sm:p-8 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" /></td></tr>
                 ) : data.length > 0 ? (
                   data.map((item) => (
                     <tr key={item._id} className="hover:bg-slate-50/50">
@@ -296,7 +296,7 @@ function Courses() {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="6" className="p-8 text-center text-slate-500">No records found.</td></tr>
+                  <tr><td colSpan="6" className="p-5 sm:p-8 text-center text-slate-500">No records found.</td></tr>
                 )}
               </tbody>
             </table>
@@ -307,8 +307,8 @@ function Courses() {
       {/* Assign Faculty Modal */}
       {isAssignFacultyOpen && selectedCourse && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-xl animate-in fade-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto w-full max-w-md shadow-xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 flex-wrap gap-3">
               <h3 className="font-bold text-lg text-slate-800">Assign Faculty</h3>
               <button onClick={() => setIsAssignFacultyOpen(false)} className="text-slate-400 hover:text-slate-600">&times;</button>
             </div>
@@ -338,8 +338,8 @@ function Courses() {
       {/* Register Student Modal */}
       {isRegisterStudentOpen && selectedCourse && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-xl animate-in fade-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto w-full max-w-md shadow-xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50 flex-wrap gap-3">
               <h3 className="font-bold text-lg text-slate-800">Register Student</h3>
               <button onClick={() => setIsRegisterStudentOpen(false)} className="text-slate-400 hover:text-slate-600">&times;</button>
             </div>

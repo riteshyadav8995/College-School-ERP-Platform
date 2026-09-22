@@ -250,7 +250,7 @@ function Students() {
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden relative min-h-[500px]">
-      <div className="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+      <div className="p-4 sm:p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <div className="bg-primary/10 p-2 rounded-lg"><Users className="w-5 h-5 text-primary" /></div>
           <h2 className="text-xl font-bold text-slate-800">Student Lifecycle</h2>
@@ -351,8 +351,8 @@ function Students() {
       {/* View Profile Modal */}
       {isProfileModalOpen && selectedStudent && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-md animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800">Student Profile</h3>
               <button onClick={() => setIsProfileModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X className="w-5 h-5" /></button>
             </div>
@@ -370,13 +370,13 @@ function Students() {
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <h5 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Email Address</h5>
                     <p className="text-slate-800 font-medium">{selectedStudent.user?.email || 'N/A'}</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <h5 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Roll Number</h5>
                     <p className="text-slate-800 font-medium">{selectedStudent.rollNumber || 'N/A'}</p>
@@ -386,7 +386,7 @@ function Students() {
                     <p className="text-slate-800 font-medium">{selectedStudent.gender || 'Male'}</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <h5 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Program</h5>
                     <p className="text-slate-800 font-medium">{selectedStudent.program?.name || 'N/A'}</p>
@@ -396,7 +396,7 @@ function Students() {
                     <p className="text-slate-800 font-medium">{selectedStudent.year || 'N/A'}</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <h5 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">End Course Date</h5>
                     <p className="text-slate-800 font-medium">{selectedStudent.endCourseDate ? new Date(selectedStudent.endCourseDate).toLocaleDateString() : 'N/A'}</p>
@@ -414,8 +414,8 @@ function Students() {
       {/* Enroll Student Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-md animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800">Enroll New Student</h3>
               <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X className="w-5 h-5" /></button>
             </div>
@@ -432,7 +432,7 @@ function Students() {
                 <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
                 <input required type="password" name="password" value={formData.password} onChange={handleInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="For initial login" />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Roll Number</label>
                   <input required type="text" name="rollNumber" value={formData.rollNumber} onChange={handleInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
@@ -457,7 +457,7 @@ function Students() {
                   </select>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Program</label>
                   <select required name="program" value={formData.program} onChange={handleInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-white">
@@ -478,7 +478,7 @@ function Students() {
                 </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Hostel (Optional)</label>
                   <select name="hostel" value={formData.hostel} onChange={handleInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-white" disabled={!formData.program || hostels.length === 0}>
@@ -512,8 +512,8 @@ function Students() {
       {/* Edit Student Modal */}
       {isEditModalOpen && selectedStudent && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-lg animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800">Edit Student Info</h3>
               <button onClick={() => setIsEditModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X className="w-5 h-5" /></button>
             </div>
@@ -522,7 +522,7 @@ function Students() {
                 <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
                 <input required type="text" name="name" value={editFormData.name} onChange={handleEditInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Student ID</label>
                   <input required type="text" name="studentId" value={editFormData.studentId} onChange={handleEditInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
@@ -533,7 +533,7 @@ function Students() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Department</label>
                   <select name="department" value={editFormData.department} onChange={handleEditInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-white">
@@ -552,7 +552,7 @@ function Students() {
                   </select>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Program</label>
                   <select name="program" value={editFormData.program} onChange={handleEditInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-white">
@@ -590,8 +590,8 @@ function Students() {
       {/* Promote Student Modal */}
       {isPromoteModalOpen && selectedStudent && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-sm animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2"><GraduationCap className="w-5 h-5 text-emerald-500" /> Promote Student</h3>
               <button onClick={() => setIsPromoteModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X className="w-5 h-5" /></button>
             </div>

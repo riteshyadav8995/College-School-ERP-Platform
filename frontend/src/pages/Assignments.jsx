@@ -143,7 +143,7 @@ function Assignments() {
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden relative">
-      <div className="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+      <div className="p-4 sm:p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <div className="bg-primary/10 p-2 rounded-lg">
             <FileText className="w-5 h-5 text-primary" />
@@ -203,8 +203,8 @@ function Assignments() {
       {/* View Details Modal */}
       {isDetailsModalOpen && selectedAssignment && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-lg animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800">{selectedAssignment.title}</h3>
               <button onClick={() => setIsDetailsModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors">
                 <X className="w-5 h-5" />
@@ -219,7 +219,7 @@ function Assignments() {
                 <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Description</h4>
                 <p className="text-slate-800 whitespace-pre-wrap">{selectedAssignment.description || 'No description provided.'}</p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Attached File</h4>
                   {selectedAssignment.fileUrl ? (
@@ -244,8 +244,8 @@ function Assignments() {
       {/* Submit Assignment Modal */}
       {isSubmitModalOpen && selectedAssignment && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-md animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800">Submit Assignment</h3>
               <button onClick={() => setIsSubmitModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors">
                 <X className="w-5 h-5" />
@@ -287,8 +287,8 @@ function Assignments() {
       {/* Create Assignment Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-lg animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800">Create New Assignment</h3>
               <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors">
                 <X className="w-5 h-5" />
@@ -303,7 +303,7 @@ function Assignments() {
                 <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
                 <textarea name="description" value={formData.description} onChange={handleInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="Instructions for the assignment..."></textarea>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Course</label>
                   <select required name="course" value={formData.course} onChange={handleInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-white">

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/authSlice';
 import SessionSelector from '../components/SessionSelector';
 import { loadSession, saveSession, setCurrentSession } from '../lib/session';
-import { LayoutDashboard, Users, BookOpen, User, DollarSign, Settings, Bell, MessageSquare, ChevronDown, GraduationCap, Award, Box, Briefcase, FileBarChart, Bot, Building2, LogOut, Search, CreditCard, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, Users, BookOpen, User, DollarSign, Settings, ChevronDown, GraduationCap, Award, Box, Briefcase, FileBarChart, Bot, Building2, LogOut, CreditCard, ChevronRight, Menu, X } from 'lucide-react';
 
 const NavItem = ({ to, icon: Icon, label, hidden }) => {
   const location = useLocation();
@@ -68,6 +68,7 @@ function DashboardLayout() {
 
   const { user } = useSelector((state) => state.auth);
   
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [session, setSession] = useState(() => (user ? loadSession(user) : null));
 
   const [expandedMenus, setExpandedMenus] = useState({
@@ -90,6 +91,7 @@ function DashboardLayout() {
     if (mainContentRef.current) {
       mainContentRef.current.scrollTo(0, 0);
     }
+    setSidebarOpen(false);
   }, [location.pathname]);
 
   const onLogout = () => {
@@ -135,9 +137,13 @@ function DashboardLayout() {
 
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-slate-50 flex">
+    <div className="h-dvh w-full overflow-hidden bg-slate-50 flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-900 border-r border-slate-800 hidden md:flex flex-col shrink-0 text-slate-300">
+      {/* Backdrop for the mobile / tablet drawer */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 bg-slate-900/50 z-30 lg:hidden" onClick={() => setSidebarOpen(false)} />
+      )}
+      <aside className={`w-64 bg-slate-900 border-r border-slate-800 flex flex-col shrink-0 text-slate-300 fixed inset-y-0 left-0 z-40 transition-transform duration-200 lg:static lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="p-6 border-b border-slate-800 flex items-center gap-3">
           <div className="bg-primary/20 p-2 rounded-lg">
             <GraduationCap className="w-6 h-6 text-primary-400" />
@@ -146,6 +152,9 @@ function DashboardLayout() {
             {shortForm} ERP<br/>
             <span className="text-xs font-medium text-slate-400">Portal</span>
           </span>
+          <button type="button" onClick={() => setSidebarOpen(false)} className="ml-auto p-1.5 text-slate-400 hover:text-white rounded-lg lg:hidden" aria-label="Close menu">
+            <X className="w-5 h-5" />
+          </button>
         </div>
         
         <nav className="p-4 flex-1 space-y-1 overflow-y-auto custom-scrollbar">
@@ -224,14 +233,19 @@ function DashboardLayout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50/50">
+      <main className="flex-1 min-w-0 flex flex-col h-full overflow-hidden bg-slate-50/50">
         {/* Header */}
-        <header className="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between shrink-0 shadow-sm z-10">
-          <div className="flex flex-col">
-            <h1 className="text-xl font-bold text-slate-800">Welcome, {user.name}</h1>
-            <p className="text-sm text-slate-500 font-medium">
-              {formatRole(user.role)} <span className="mx-2 text-slate-300">•</span> {institutionName}
-            </p>
+        <header className="bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 shrink-0 shadow-sm z-10">
+          <div className="flex items-center gap-3 min-w-0">
+            <button type="button" onClick={() => setSidebarOpen(true)} className="p-2 -ml-2 text-slate-600 hover:bg-slate-100 rounded-lg lg:hidden" aria-label="Open menu">
+              <Menu className="w-5 h-5" />
+            </button>
+            <div className="flex flex-col min-w-0">
+              <h1 className="text-base sm:text-xl font-bold text-slate-800 truncate">Welcome, {user.name}</h1>
+              <p className="text-xs sm:text-sm text-slate-500 font-medium truncate">
+                {formatRole(user.role)} <span className="mx-2 text-slate-300">•</span> {institutionName}
+              </p>
+            </div>
           </div>
 
           <div className="flex items-center gap-6">
@@ -242,7 +256,7 @@ function DashboardLayout() {
         </header>
 
         {/* Content Area */}
-        <div ref={mainContentRef} className="flex-1 overflow-auto p-8">
+        <div ref={mainContentRef} className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
           <Outlet key={sessionKey} />
         </div>
       </main>

@@ -133,7 +133,7 @@ function Library() {
 
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         {/* Header Actions */}
-        <div className="p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50">
+        <div className="p-4 sm:p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50">
           <div className="flex items-center gap-3">
             <div className="bg-primary/10 p-2.5 rounded-xl">
               <BookMarked className="w-6 h-6 text-primary" />
@@ -233,7 +233,7 @@ function Library() {
                     </tr>
                   ))) : (
                     <tr>
-                      <td colSpan="7" className="p-8 text-center text-slate-500">No books found in the catalog.</td>
+                      <td colSpan="7" className="p-5 sm:p-8 text-center text-slate-500">No books found in the catalog.</td>
                     </tr>
                   )}
                 </tbody>
@@ -292,7 +292,7 @@ function Library() {
                     );
                   }) : (
                     <tr>
-                      <td colSpan="6" className="p-8 text-center text-slate-500">No active book issues found.</td>
+                      <td colSpan="6" className="p-5 sm:p-8 text-center text-slate-500">No active book issues found.</td>
                     </tr>
                   )}
                 </tbody>
@@ -305,8 +305,8 @@ function Library() {
       {/* Add Book Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md shadow-xl animate-in zoom-in-95 duration-200">
-            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto w-full max-w-md shadow-xl animate-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center flex-wrap gap-3">
               <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
                 <BookMarked className="w-5 h-5 text-primary" />
                 Add New Book
@@ -314,20 +314,20 @@ function Library() {
               <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 p-1.5 rounded-lg transition-colors"><X className="w-5 h-5" /></button>
             </div>
             <form onSubmit={handleAddBook} className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Book ID</label>
                   <input type="text" name="bookId" required value={formData.bookId} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="e.g. CS-101" />
                 </div>
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Book Title</label>
                   <input type="text" name="title" required value={formData.title} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter book title" />
                 </div>
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Author</label>
                   <input type="text" name="author" required value={formData.author} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Enter author name" />
                 </div>
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Category</label>
                   <input type="text" name="category" required value={formData.category} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="e.g. Computer Science" />
                 </div>
@@ -357,8 +357,8 @@ function Library() {
       {/* Issue Book Modal */}
       {isIssueModalOpen && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md shadow-xl animate-in zoom-in-95 duration-200">
-            <div className="p-6 border-b border-slate-100 flex justify-between items-center">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto w-full max-w-md shadow-xl animate-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center flex-wrap gap-3">
               <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
                 <ScanLine className="w-5 h-5 text-primary" />
                 Issue Book

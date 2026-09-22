@@ -108,7 +108,7 @@ function Scholarships() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {loading ? (
-                  <tr><td colSpan="5" className="p-8 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" /></td></tr>
+                  <tr><td colSpan="5" className="p-5 sm:p-8 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" /></td></tr>
                 ) : data.length > 0 ? (
                   data.map((item) => (
                     <tr key={item._id} className="hover:bg-slate-50/50">
@@ -119,7 +119,7 @@ function Scholarships() {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="5" className="p-8 text-center text-slate-500">No records found.</td></tr>
+                  <tr><td colSpan="5" className="p-5 sm:p-8 text-center text-slate-500">No records found.</td></tr>
                 )}
               </tbody>
             </table>

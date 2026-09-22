@@ -45,7 +45,7 @@ function Register() {
   return (
     <div className="flex min-h-screen bg-slate-50 items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-xl overflow-hidden">
-        <div className="p-8">
+        <div className="p-5 sm:p-8">
           <div className="flex justify-center mb-6">
             <div className="bg-primary/10 p-3 rounded-full">
               <BookOpen className="w-8 h-8 text-primary" />

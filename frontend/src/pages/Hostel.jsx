@@ -152,8 +152,8 @@ function Hostel() {
           <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
             <h2 className="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2"><Building className="w-5 h-5 text-primary" /> Create Hostel</h2>
             <form onSubmit={handleHostelSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Hostel Name</label>
                   <input type="text" required value={hostelData.name} onChange={e => setHostelData({...hostelData, name: e.target.value})} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="e.g. Boys Hostel A" />
                 </div>
@@ -171,7 +171,7 @@ function Hostel() {
                     <option value="Girls">Girls</option>
                   </select>
                 </div>
-                <div className="col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-semibold text-slate-700 mb-1">Total Rooms</label>
                   <input type="number" required value={hostelData.totalRooms} onChange={e => setHostelData({...hostelData, totalRooms: e.target.value})} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />
                 </div>
@@ -196,7 +196,7 @@ function Hostel() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {loading ? (
-                    <tr><td colSpan="4" className="p-8 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" /></td></tr>
+                    <tr><td colSpan="4" className="p-5 sm:p-8 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" /></td></tr>
                   ) : hostels.length > 0 ? (
                     hostels.map((h) => (
                       <tr key={h._id} onClick={() => { setActiveHostel(h._id); fetchRooms(h._id); }} className={`cursor-pointer transition-colors ${activeHostel === h._id ? 'bg-indigo-50' : 'hover:bg-slate-50'}`}>
@@ -209,7 +209,7 @@ function Hostel() {
                       </tr>
                     ))
                   ) : (
-                    <tr><td colSpan="4" className="p-8 text-center text-slate-500">No hostels found.</td></tr>
+                    <tr><td colSpan="4" className="p-5 sm:p-8 text-center text-slate-500">No hostels found.</td></tr>
                   )}
                 </tbody>
               </table>
@@ -222,7 +222,7 @@ function Hostel() {
           {activeHostel ? (
             <>
               <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4 flex-wrap gap-3">
                   <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2"><Plus className="w-5 h-5 text-primary" /> Add Room(s)</h2>
                   <button onClick={() => setIsBulkMode(!isBulkMode)} className="text-sm text-indigo-600 font-medium hover:underline">
                     {isBulkMode ? 'Single Room Mode' : 'Bulk Generation Mode'}
@@ -230,7 +230,7 @@ function Hostel() {
                 </div>
                 {isBulkMode ? (
                   <form onSubmit={handleBulkRoomSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-semibold text-slate-700 mb-1">Floor</label>
                         <input type="text" required value={bulkRoomData.floor} onChange={e => setBulkRoomData({...bulkRoomData, floor: e.target.value})} placeholder="e.g. 1" className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />
@@ -240,7 +240,7 @@ function Hostel() {
                         <input type="number" required value={bulkRoomData.capacity} onChange={e => setBulkRoomData({...bulkRoomData, capacity: e.target.value})} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-semibold text-slate-700 mb-1">Start Room No.</label>
                         <input type="number" required value={bulkRoomData.startRoom} onChange={e => setBulkRoomData({...bulkRoomData, startRoom: e.target.value})} placeholder="e.g. 101" className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />
@@ -256,7 +256,7 @@ function Hostel() {
                   </form>
                 ) : (
                   <form onSubmit={handleRoomSubmit} className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-semibold text-slate-700 mb-1">Room Number</label>
                         <input type="text" required value={roomData.roomNumber} onChange={e => setRoomData({...roomData, roomNumber: e.target.value})} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />
@@ -312,7 +312,7 @@ function Hostel() {
                           );
                         })
                       ) : (
-                        <tr><td colSpan="7" className="p-8 text-center text-slate-500">No rooms found.</td></tr>
+                        <tr><td colSpan="7" className="p-5 sm:p-8 text-center text-slate-500">No rooms found.</td></tr>
                       )}
                     </tbody>
                   </table>

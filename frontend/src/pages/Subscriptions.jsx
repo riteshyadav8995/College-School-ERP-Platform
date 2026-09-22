@@ -65,7 +65,7 @@ function Subscriptions() {
     }
   };
 
-  if (user?.role !== 'super_admin') return <div className="p-8 text-center text-red-500 font-bold">Access Denied</div>;
+  if (user?.role !== 'super_admin') return <div className="p-5 sm:p-8 text-center text-red-500 font-bold">Access Denied</div>;
 
   return (
     <div className="space-y-6">
@@ -91,7 +91,7 @@ function Subscriptions() {
               <input type="text" name="name" required value={formData.name} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="e.g. Enterprise" />
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Price (₹/mo)</label>
                 <input type="number" name="price" required value={formData.price} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />
@@ -102,7 +102,7 @@ function Subscriptions() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Max Students</label>
                 <input type="number" name="maxStudents" required value={formData.maxStudents} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />
@@ -113,7 +113,7 @@ function Subscriptions() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">SMS Credits</label>
                 <input type="number" name="smsCredits" value={formData.smsCredits} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all" />

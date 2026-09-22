@@ -125,7 +125,7 @@ const Institutions = () => {
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-6">
-      <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+      <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold text-slate-800">Institutions Management</h1>
           <p className="text-slate-500 text-sm mt-1">Manage tenant schools and colleges across the platform.</p>
@@ -183,7 +183,7 @@ const Institutions = () => {
       {showModal && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-xl">
-            <div className="p-6 border-b border-slate-100 flex justify-between items-center sticky top-0 bg-white">
+            <div className="p-6 border-b border-slate-100 flex justify-between items-center sticky top-0 bg-white flex-wrap gap-3">
               <h2 className="text-xl font-bold text-slate-800">{isEditMode ? 'Edit Institution' : 'Register Institution'}</h2>
               <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-slate-600 font-bold text-xl">&times;</button>
             </div>

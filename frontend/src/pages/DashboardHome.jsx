@@ -205,7 +205,7 @@ function DashboardHome() {
           <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Recent Activities */}
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm col-span-1 lg:col-span-2">
-              <div className="p-5 border-b border-slate-100 flex justify-between items-center">
+              <div className="p-5 border-b border-slate-100 flex justify-between items-center flex-wrap gap-3">
                 <h3 className="text-base font-bold text-slate-800">Recent Activities</h3>
                 {stats.recentActivities?.length > 5 && (
                   <button onClick={() => setShowAllActivities(!showAllActivities)} className="text-sm font-medium text-primary hover:text-primary-600 flex items-center">

@@ -128,7 +128,7 @@ function Attendance() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center">
+      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex justify-between items-center flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <div className="bg-primary/10 p-2.5 rounded-xl">
             <ClipboardList className="w-6 h-6 text-primary" />
@@ -168,7 +168,7 @@ function Attendance() {
                   </tr>
                 ))}
                 {studentStats.length === 0 && (
-                  <tr><td colSpan="5" className="p-8 text-center text-slate-500">No attendance records found.</td></tr>
+                  <tr><td colSpan="5" className="p-5 sm:p-8 text-center text-slate-500">No attendance records found.</td></tr>
                 )}
               </tbody>
             </table>
@@ -266,7 +266,7 @@ function Attendance() {
                       )
                     })}
                     {students.length === 0 && (
-                      <tr><td colSpan="3" className="p-8 text-center text-slate-500">No students registered for this course.</td></tr>
+                      <tr><td colSpan="3" className="p-5 sm:p-8 text-center text-slate-500">No students registered for this course.</td></tr>
                     )}
                   </tbody>
                 </table>

@@ -143,3 +143,13 @@
     background-color: color-mix(in oklab, var(--color-primary) 6%, transparent);
   }
 }
+
+@layer base {
+  /* On phones keep table cells on one line; the table wrapper scrolls sideways */
+  @media (max-width: 639px) {
+    table th,
+    table td {
+      white-space: nowrap;
+    }
+  }
+}

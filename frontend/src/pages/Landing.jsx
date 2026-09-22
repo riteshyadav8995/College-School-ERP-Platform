@@ -86,7 +86,7 @@ function Landing() {
       </div>
 
       {/* Right Column: Auth Forms */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8 lg:p-24 relative bg-white">
+      <div className="w-full md:w-1/2 flex items-center justify-center p-5 sm:p-8 lg:p-24 relative bg-white">
         
         {/* Mobile Header */}
         <div className="md:hidden absolute top-8 left-8 flex items-center gap-2">
@@ -123,7 +123,7 @@ function Landing() {
                 />
               </div>
               <div>
-                <div className="flex justify-between items-center mb-1.5">
+                <div className="flex justify-between items-center mb-1.5 flex-wrap gap-3">
                   <label className="block text-sm font-medium text-slate-700">Password</label>
                   <a href="#" className="text-xs font-medium text-primary hover:underline">Forgot password?</a>
                 </div>

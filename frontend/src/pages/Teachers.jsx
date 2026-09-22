@@ -164,7 +164,7 @@ function Teachers() {
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden relative min-h-[500px]">
-      <div className="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+      <div className="p-4 sm:p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <div className="bg-primary/10 p-2 rounded-lg"><BookOpen className="w-5 h-5 text-primary" /></div>
           <h2 className="text-xl font-bold text-slate-800">Staff & Teachers</h2>
@@ -237,8 +237,8 @@ function Teachers() {
       {/* Add Teacher Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-md animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800">Add New Staff</h3>
               <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X className="w-5 h-5" /></button>
             </div>
@@ -278,8 +278,8 @@ function Teachers() {
       {/* Admin Academic Edit Modal */}
       {isAdminEditOpen && selectedTeacher && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-lg animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2"><Shield className="w-5 h-5 text-indigo-500" /> Academic Setup</h3>
               <button onClick={() => setIsAdminEditOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X className="w-5 h-5" /></button>
             </div>
@@ -319,8 +319,8 @@ function Teachers() {
       {/* HR Payroll Edit Modal */}
       {isHREditOpen && selectedTeacher && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-xl overflow-hidden animate-in fade-in zoom-in duration-200 my-8">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100 sticky top-0 bg-white z-10">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-xl animate-in fade-in zoom-in duration-200 my-8">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 sticky top-0 bg-white z-10 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2"><Briefcase className="w-5 h-5 text-emerald-500" /> Payroll & HR Data</h3>
               <button onClick={() => setIsHREditOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors"><X className="w-5 h-5" /></button>
             </div>
@@ -328,7 +328,7 @@ function Teachers() {
               
               <div className="space-y-4">
                 <h4 className="font-semibold text-slate-700 border-b border-slate-100 pb-2">Employment Details</h4>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Salary (₹)</label>
                     <input type="number" name="salary" value={hrFormData.salary} onChange={handleHrInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
@@ -338,7 +338,7 @@ function Teachers() {
                     <input type="date" name="joiningDate" value={hrFormData.joiningDate} onChange={handleHrInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Experience (Years)</label>
                     <input type="number" name="experience" value={hrFormData.experience} onChange={handleHrInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
@@ -356,7 +356,7 @@ function Teachers() {
                   <label className="block text-sm font-medium text-slate-700 mb-1">PF Number</label>
                   <input type="text" name="pfNumber" value={hrFormData.pfNumber} onChange={handleHrInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1">Bank Name</label>
                     <input type="text" name="bankName" value={hrFormData.bankName} onChange={handleHrInputChange} className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all" />
@@ -386,8 +386,8 @@ function Teachers() {
       {/* View Profile Modal */}
       {isProfileModalOpen && selectedTeacher && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+          <div className="bg-white rounded-2xl max-h-[90dvh] overflow-y-auto shadow-xl w-full max-w-md animate-in fade-in zoom-in duration-200">
+            <div className="flex justify-between items-center p-6 border-b border-slate-100 flex-wrap gap-3">
               <h3 className="text-xl font-bold text-slate-800">Teacher Profile</h3>
               <button onClick={() => setIsProfileModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition-colors">
                 <X className="w-5 h-5" />
@@ -412,7 +412,7 @@ function Teachers() {
                   <h5 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Department</h5>
                   <p className="text-slate-800 font-medium">{selectedTeacher.department?.name || 'General'}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <h5 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Qualification</h5>
                     <p className="text-slate-800 font-medium">{selectedTeacher.qualification || 'N/A'}</p>

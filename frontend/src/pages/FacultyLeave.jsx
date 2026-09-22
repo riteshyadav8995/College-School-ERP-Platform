@@ -93,7 +93,7 @@ function FacultyLeave() {
                   <option value="Unpaid">Unpaid Leave</option>
                 </select>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5">Start Date</label>
                   <input type="date" name="startDate" required value={formData.startDate} onChange={handleInputChange} className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none text-sm" />
@@ -135,7 +135,7 @@ function FacultyLeave() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {loading ? (
-                  <tr><td colSpan="6" className="p-8 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" /></td></tr>
+                  <tr><td colSpan="6" className="p-5 sm:p-8 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-primary" /></td></tr>
                 ) : leaves.length > 0 ? (
                   leaves.map((leave) => (
                     <tr key={leave._id} className="hover:bg-slate-50/50">
@@ -173,7 +173,7 @@ function FacultyLeave() {
                     </tr>
                   ))
                 ) : (
-                  <tr><td colSpan="6" className="p-8 text-center text-slate-500">No leave requests found.</td></tr>
+                  <tr><td colSpan="6" className="p-5 sm:p-8 text-center text-slate-500">No leave requests found.</td></tr>
                 )}
               </tbody>
             </table>

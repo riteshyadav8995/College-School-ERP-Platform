@@ -36,7 +36,7 @@ function SessionSelector({ user, session, onChange }) {
   const selectClass = 'px-2 py-1 text-xs font-bold rounded-md border outline-none cursor-pointer focus:ring-2 focus:ring-primary/20';
 
   return (
-    <div className="hidden lg:flex items-center gap-3 mr-4">
+    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
       <label className="flex items-center gap-1 px-2 py-0.5 bg-blue-50 text-blue-700 text-xs font-bold rounded-md border border-blue-100">
         AY:
         <select value={academicYear} onChange={(e) => choose('academicYear', e.target.value)} className={`${selectClass} bg-blue-50 border-transparent text-blue-700`}>

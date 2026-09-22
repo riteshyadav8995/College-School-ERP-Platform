@@ -160,7 +160,7 @@ function StudentHostel() {
                 <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Hostel Name</p>
                 <p className="text-lg font-medium text-slate-800">{profile.hostel?.name}</p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Room Number</p>
                   <p className="text-lg font-medium text-slate-800">{profile.room?.roomNumber}</p>
@@ -192,7 +192,7 @@ function StudentHostel() {
                 Share this key with your friends from the same program so they can book the remaining beds in your room!
               </p>
               {profile.room?.shareKey ? (
-                <div className="bg-white/10 p-4 rounded-xl border border-white/20 flex justify-between items-center backdrop-blur-sm">
+                <div className="bg-white/10 p-4 rounded-xl border border-white/20 flex justify-between items-center backdrop-blur-sm flex-wrap gap-3">
                   <span className="font-mono text-2xl tracking-widest font-bold">{profile.room.shareKey}</span>
                   <button onClick={copyToClipboard} className="p-2 hover:bg-white/20 rounded-lg transition-colors">
                     {copied ? <CheckCircle2 className="w-5 h-5 text-green-300" /> : <Copy className="w-5 h-5" />}

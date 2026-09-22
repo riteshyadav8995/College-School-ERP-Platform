@@ -60,7 +60,7 @@ function Login() {
           <p className="text-primary-100 text-lg mb-12 leading-relaxed">
             The complete School ERP platform. Streamline admissions, track attendance, manage faculty operations, and empower your students—all from one powerful dashboard.
           </p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-white/5 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
               <h3 className="font-semibold text-lg mb-1 text-white">Smart Scheduling</h3>
               <p className="text-primary-200 text-sm">Automated timetables without resource conflicts.</p>
@@ -75,7 +75,7 @@ function Login() {
 
       {/* Right Side: Login Form */}
       <div className="flex-1 flex flex-col justify-center items-center p-6 lg:p-12 bg-slate-50">
-        <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden p-8 lg:p-10 border border-slate-100 relative">
+        <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden p-5 sm:p-8 lg:p-10 border border-slate-100 relative">
           
           <div className="lg:hidden flex justify-center mb-6">
             <div className="bg-primary/10 p-3 rounded-2xl">

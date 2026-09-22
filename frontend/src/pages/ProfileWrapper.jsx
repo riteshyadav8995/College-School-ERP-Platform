@@ -15,7 +15,7 @@ function ProfileWrapper() {
   }
 
   // Fallback for admins if they try to access profile, though they might not have it in the sidebar
-  return <div className="p-8 text-center text-slate-500">Profiles are only available for Students and Teachers.</div>;
+  return <div className="p-5 sm:p-8 text-center text-slate-500">Profiles are only available for Students and Teachers.</div>;
 }
 
 export default ProfileWrapper;

@@ -31,12 +31,12 @@ function TeacherProfile() {
   }
 
   if (!profile) {
-    return <div className="p-8 text-center text-slate-500">Failed to load profile.</div>;
+    return <div className="p-5 sm:p-8 text-center text-slate-500">Failed to load profile.</div>;
   }
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+      <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-r from-primary/10 to-indigo-500/10"></div>
         <div className="relative z-10 w-32 h-32 rounded-full bg-white border-4 border-white shadow-lg overflow-hidden flex-shrink-0 flex items-center justify-center text-5xl font-bold text-slate-300">
            {profile.user?.name?.charAt(0) || 'T'}
