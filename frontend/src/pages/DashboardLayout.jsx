@@ -233,34 +233,6 @@ function DashboardLayout() {
               </div>
             )}
 
-            {/* Search Bar */}
-            <div className="hidden md:flex items-center bg-slate-100 rounded-full px-4 py-2 w-64 border border-slate-200 focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
-              <Search className="w-4 h-4 text-slate-400 shrink-0" />
-              <input type="text" placeholder="Search..." className="bg-transparent border-none outline-none ml-2 text-sm w-full text-slate-700 placeholder-slate-400" />
-            </div>
-
-            {/* Icons */}
-            <div className="flex items-center gap-2">
-              <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors relative">
-                <MessageSquare className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-emerald-500 rounded-full border-2 border-white"></span>
-              </button>
-              <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors relative">
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-              </button>
-            </div>
-
-            {/* Profile */}
-            <div className="flex items-center gap-3 pl-4 border-l border-slate-200">
-              <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shadow-inner">
-                {user.name.charAt(0).toUpperCase()}
-              </div>
-              <div className="hidden md:block">
-                <p className="text-sm font-semibold text-slate-700 leading-tight">{user.name.split(' ')[0]}</p>
-                <ChevronDown className="w-3 h-3 text-slate-400 mt-0.5" />
-              </div>
-            </div>
           </div>
         </header>
 
